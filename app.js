@@ -1,18 +1,16 @@
-var port = process.env.PORT || 3000;
-
 var app = require("express")();
 var server = require("http").Server(app);
+
+// socket.io connects to the Client website
 var io = require("socket.io")(server);
 
+var port = process.env.PORT || 3000;
 server.listen(port);
-// WARNING: app.listen(80) will NOT work here!
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
-// socket.io connects to the Client website
-// var io = require("socket.io").listen(server);
 // axios makes requests to The Movie DB API. We'll receive movie titles from the client (via socket.io)
 // the titles will be searced on The Movie DB to return URLs for the poster images, which will be
 // sent back to the client through socket.io
