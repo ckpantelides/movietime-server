@@ -4,7 +4,7 @@ var server = require("http").Server(app);
 // socket.io connects to the Client website
 var io = require("socket.io")(server);
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8000;
 server.listen(port);
 
 app.get("/", function(req, res) {
@@ -23,7 +23,8 @@ var urlStart = "https://api.themoviedb.org/3/search/movie?api_key=";
 var urlEnd = "&query=";
 
 // Movie Database API key
-var API = process.env.mdbkey;
+// var API = process.env.mdbkey;
+var API = "c1947125a27dd116d61001d62cc9123b";
 
 // creates connection to the client through socket.io
 io.on("connection", function(socket) {
@@ -51,8 +52,10 @@ io.on("connection", function(socket) {
           for (let k = 0; k < args.length; k++) {
             var posterPath = args[k].data.results[0].poster_path;
             var posterUrl = "http://image.tmdb.org/t/p/w185" + posterPath;
-
-            movieList.push(posterUrl);
+            var obj = {};
+            obj.poster = posterUrl;
+            obj.blurb = args[k].data.results[0].overview;
+            movieList.push(obj);
           }
         })
       )
