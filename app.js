@@ -50,7 +50,8 @@ io.on("connection", function(socket) {
         axios.spread((...args) => {
           for (let k = 0; k < args.length; k++) {
             var posterPath = args[k].data.results[0].poster_path;
-            var posterUrl = "http://image.tmdb.org/t/p/w185" + posterPath;
+            var posterUrl = "https://image.tmdb.org/t/p/w185" + posterPath;
+
             // object to save poster image url and movie overview/blurb
             var obj = {};
             obj.poster = posterUrl;
