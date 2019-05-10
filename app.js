@@ -23,8 +23,7 @@ var urlStart = "https://api.themoviedb.org/3/search/movie?api_key=";
 var urlEnd = "&query=";
 
 // Movie Database API key
-// var API = process.env.mdbkey;
-var API = "c1947125a27dd116d61001d62cc9123b";
+var API = process.env.mdbkey;
 
 // creates connection to the client through socket.io
 io.on("connection", function(socket) {
@@ -52,6 +51,7 @@ io.on("connection", function(socket) {
           for (let k = 0; k < args.length; k++) {
             var posterPath = args[k].data.results[0].poster_path;
             var posterUrl = "http://image.tmdb.org/t/p/w185" + posterPath;
+            // object to save poster image url and movie overview/blurb
             var obj = {};
             obj.poster = posterUrl;
             obj.blurb = args[k].data.results[0].overview;
