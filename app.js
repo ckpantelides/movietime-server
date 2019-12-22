@@ -36,7 +36,7 @@ io.on("connection", function(socket) {
     var movieList = [];
     // builds the url for each axios "get" request and pushes it to the "promises" array
     for (var i = 0, l = obj.data.length; i < l; i++) {
-      let url = urlStart + API + urlEnd + obj.data[i].title;
+      let url = urlStart + API + urlEnd + obj.data[i];
       promises.push(axios.get(url));
     }
 
